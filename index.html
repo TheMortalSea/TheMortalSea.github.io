@@ -1,78 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Interactive World Globe</title>
-<style>
-body, html {
-margin: 0;
-padding: 0;
-height: 100%;
-overflow: hidden;
-}
-#globe-container {
-width: 100%;
-height: 100%;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive 3D Globe</title>
+    <link rel="stylesheet" href="assets/css/globe.css">
+    <!-- Load D3.js and TopoJSON -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
 </head>
 <body>
-<div id="globe-container"></div>
-<!-- Include Three.js and OrbitControls libraries -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/examples/js/controls/OrbitControls.min.js"></script>
-
-<!-- Include the WorldGlobe class -->
-<script>
-// Paste the WorldGlobe class code here
-// from the previous artifact
-import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import { TextureLoader } from 'three/src/loaders/TextureLoader';
-
-class WorldGlobe {
-  constructor(containerId) {
-    this.container = document.getElementById(containerId);
-    this.scene = new THREE.Scene();
-    this.camera = new THREE.PerspectiveCamera(
-      75,
-      this.container.clientWidth / this.container.clientHeight,
-      0.1,
-      1000
-    );
-    this.renderer = new THREE.WebGLRenderer({ antialias: true });
-    this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
-    this.container.appendChild(this.renderer.domElement);
-
-    this.controls = new OrbitControls(this.camera, this.renderer.domElement);
-
-    this.createGlobe();
-    this.animate();
-  }
-
-  createGlobe() {
-    const geometry = new THREE.SphereGeometry(5, 32, 32);
-
-    const textureLoader = new TextureLoader();
-    const texture = textureLoader.load('https://i.imgur.com/HF4ZlED.jpg');
-
-    const material = new THREE.MeshBasicMaterial({ map: texture });
-    this.globe = new THREE.Mesh(geometry, material);
-    this.scene.add(this.globe);
-
-    this.camera.position.z = 15;
-  }
-
-  animate = () => {
-    requestAnimationFrame(this.animate);
-    this.controls.update();
-    this.renderer.render(this.scene, this.camera);
-  };
-}
-</script>
-
-<script>
-// Create the globe instance
-const globe = new WorldGlobe('globe-container');
-</script>
+    <div id="globeViz"></div>
+    <script src="assets/js/globe.js"></script>
 </body>
 </html>
