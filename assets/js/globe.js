@@ -12,6 +12,16 @@ const svg = d3.select('#globeViz')
 // Create a group for the globe
 const g = svg.append('g');
 
+const tooltip = d3.select('body')
+    .append('div')
+    .attr('class', 'country-tooltip')
+    .style('position', 'absolute')
+    .style('background', 'rgba(0,0,0,0.7)')
+    .style('color', 'white')
+    .style('padding', '5px 10px')
+    .style('border-radius', '5px')
+    .style('display', 'none');
+
 // Set up the projection
 const projection = d3.geoOrthographic()
     .scale(250)
@@ -36,12 +46,33 @@ d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
         const countries = topojson.feature(data, data.objects.countries);
 
         // Draw the countries
-        g.selectAll('path')
-            .data(countries.features)
-            .enter()
-            .append('path')
-            .attr('class', 'country')
-            .attr('d', path);
+        const countryPaths = g.selectAll('path')
+        .data(countries.features)
+        .enter()
+        .append('path')
+        .attr('class', 'country')
+        .attr('d', path)
+        .on('mouseover', function(event, d) {
+            // Highlight the country
+            d3.select(this).attr('class', 'country hover');
+            
+            // Show tooltip with country name
+            tooltip.style('display', 'block')
+                .html(d.properties.name || 'Unknown')
+                .style('left', (event.pageX + 10) + 'px')
+                .style('top', (event.pageY + 10) + 'px');
+        })
+        .on('mouseout', function() {
+            // Remove highlight
+            d3.select(this).attr('class', 'country');
+            
+            // Hide tooltip
+            tooltip.style('display', 'none');
+        })
+        .on('click', function(event, d) {
+            // Optional: Additional action on country click
+            console.log('Selected country:', d.properties.name);
+        });
 
         // Enable rotation
         svg.call(d3.drag()
