@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Robb Young - Geospatial Data Scientist</title>
+    <title>Your Name - Geospatial Data Scientist</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -12,217 +13,189 @@
         }
 
         body {
-            font-family: 'Courier New', monospace;
-            line-height: 1.6;
+            font-family: 'Arial', sans-serif;
+            line-height: 1.5;
             color: #2c2c2c;
             background: #f8f8f6;
-            min-height: 100vh;
+            height: 100vh;
+            overflow-x: hidden;
             background-image: 
-                radial-gradient(circle at 1px 1px, rgba(44,44,44,0.15) 1px, transparent 0);
-            background-size: 20px 20px;
+                radial-gradient(circle at 1px 1px, rgba(44,44,44,0.1) 1px, transparent 0);
+            background-size: 25px 25px;
         }
 
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 40px 20px;
+        .main-container {
+            display: grid;
+            grid-template-columns: 1fr 400px 1fr;
+            grid-template-rows: auto 1fr auto;
+            height: 100vh;
+            gap: 0;
         }
 
-        .blueprint-border {
-            border: 2px solid #2c2c2c;
+        .header-section {
+            grid-column: 1 / -1;
+            background: #f8f8f6;
+            border-bottom: 3px solid #2c2c2c;
+            padding: 20px 40px;
             position: relative;
         }
 
-        .blueprint-border::before {
-            content: '';
+        .header-section::after {
+            content: 'DWG-2025-001 | SHEET 01 OF 01';
             position: absolute;
-            top: 10px;
-            left: 10px;
-            right: 10px;
-            bottom: 10px;
-            border: 1px solid #2c2c2c;
-            pointer-events: none;
+            bottom: 5px;
+            right: 20px;
+            font-size: 9px;
+            font-weight: bold;
+            letter-spacing: 1px;
         }
 
         .title-block {
-            background: #f8f8f6;
+            text-align: center;
             border: 2px solid #2c2c2c;
-            padding: 30px;
-            margin-bottom: 40px;
+            padding: 25px;
+            background: rgba(255,255,255,0.3);
             position: relative;
         }
 
-        .title-block::after {
-            content: 'SHEET 01 OF 01';
+        .title-block::before {
+            content: '';
             position: absolute;
-            bottom: 8px;
-            right: 15px;
-            font-size: 10px;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        .drawing-number {
-            position: absolute;
-            top: 8px;
-            right: 15px;
-            font-size: 10px;
-            font-weight: bold;
-            letter-spacing: 1px;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border: 1px solid #2c2c2c;
         }
 
         h1 {
-            font-size: 2.8em;
+            font-size: 2.5em;
             font-weight: bold;
             text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 5px;
-            text-align: center;
+            letter-spacing: 4px;
+            margin-bottom: 8px;
         }
 
         .subtitle {
-            text-align: center;
             font-size: 1.1em;
             letter-spacing: 2px;
             text-transform: uppercase;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             font-weight: normal;
         }
 
-        .divider {
-            width: 100%;
-            height: 2px;
-            background: #2c2c2c;
-            margin: 20px 0;
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            text-align: center;
-            font-size: 0.9em;
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            font-size: 0.85em;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        .contact-item {
-            border: 1px solid #2c2c2c;
-            padding: 10px;
-            background: rgba(255,255,255,0.5);
+        .left-panel, .right-panel {
+            padding: 30px;
+            border-right: 3px solid #2c2c2c;
+            overflow-y: auto;
         }
 
-        .section-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin-bottom: 40px;
+        .right-panel {
+            border-right: none;
+            border-left: 3px solid #2c2c2c;
+        }
+
+        .center-panel {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .globe-container {
+            width: 100%;
+            height: 350px;
+            border: 3px solid #2c2c2c;
+            background: rgba(255,255,255,0.2);
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .globe-container::before {
+            content: 'INTERACTIVE GLOBE';
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: #f8f8f6;
+            padding: 5px 15px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8em;
+            border: 2px solid #2c2c2c;
+        }
+
+        #globe {
+            width: 100%;
+            height: 100%;
         }
 
         .section {
-            background: #f8f8f6;
+            background: rgba(255,255,255,0.2);
             border: 2px solid #2c2c2c;
-            padding: 25px;
+            margin-bottom: 25px;
+            padding: 20px;
             position: relative;
         }
 
         .section-title {
             background: #f8f8f6;
-            padding: 5px 15px;
+            padding: 5px 12px;
             position: absolute;
             top: -15px;
-            left: 20px;
+            left: 15px;
             font-weight: bold;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 0.9em;
+            letter-spacing: 1.5px;
+            font-size: 0.8em;
             border: 2px solid #2c2c2c;
         }
 
-        .dimension-line {
-            position: relative;
-            margin: 15px 0;
-        }
-
-        .dimension-line::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: #2c2c2c;
-        }
-
-        .dimension-line::after {
-            content: '←―――――――――――――――→';
-            position: absolute;
-            top: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #f8f8f6;
-            padding: 0 10px;
-            font-size: 12px;
-        }
-
-        .skills-blueprint {
+        .skills-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-top: 15px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            margin-top: 10px;
         }
 
         .skill-box {
             border: 1px solid #2c2c2c;
-            padding: 8px;
+            padding: 6px;
             text-align: center;
-            font-size: 0.8em;
+            font-size: 0.75em;
             text-transform: uppercase;
             letter-spacing: 1px;
-            background: rgba(255,255,255,0.3);
-            position: relative;
-        }
-
-        .skill-box::before {
-            content: '○';
-            position: absolute;
-            left: 3px;
-            top: 3px;
-            font-size: 6px;
+            background: rgba(255,255,255,0.4);
         }
 
         .experience-item {
-            margin-bottom: 20px;
-            padding: 15px;
+            margin-bottom: 15px;
+            padding: 12px;
             border: 1px dashed #2c2c2c;
-            background: rgba(255,255,255,0.2);
-            position: relative;
-        }
-
-        .experience-item::before {
-            content: counter(exp-counter, decimal-leading-zero);
-            counter-increment: exp-counter;
-            position: absolute;
-            top: 5px;
-            right: 10px;
-            font-size: 10px;
-            font-weight: bold;
-        }
-
-        .section:nth-of-type(2) {
-            counter-reset: exp-counter;
+            background: rgba(255,255,255,0.3);
         }
 
         .experience-title {
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 1px;
-            font-size: 0.9em;
+            font-size: 0.85em;
             margin-bottom: 3px;
         }
 
         .experience-company {
-            font-size: 0.8em;
+            font-size: 0.75em;
             margin-bottom: 3px;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -230,105 +203,68 @@
 
         .experience-date {
             font-size: 0.7em;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        .projects-section {
-            background: #f8f8f6;
-            border: 2px solid #2c2c2c;
-            padding: 30px;
-            margin-bottom: 40px;
-            position: relative;
-        }
-
-        .projects-title {
-            background: #f8f8f6;
-            padding: 5px 15px;
-            position: absolute;
-            top: -15px;
-            left: 20px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 0.9em;
-            border: 2px solid #2c2c2c;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-top: 20px;
+        .experience-description {
+            font-size: 0.8em;
+            line-height: 1.4;
         }
 
         .project-card {
             border: 2px solid #2c2c2c;
-            padding: 20px;
+            padding: 15px;
             background: rgba(255,255,255,0.3);
+            margin-bottom: 15px;
             position: relative;
         }
 
         .project-card::before {
             content: '';
             position: absolute;
-            top: 5px;
-            left: 5px;
-            right: 5px;
-            bottom: 5px;
+            top: 3px;
+            left: 3px;
+            right: 3px;
+            bottom: 3px;
             border: 1px dashed #2c2c2c;
-            pointer-events: none;
         }
 
         .project-title {
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 1px;
-            font-size: 0.9em;
-            margin-bottom: 8px;
+            font-size: 0.85em;
+            margin-bottom: 5px;
         }
 
         .project-tech {
             font-size: 0.7em;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             text-transform: uppercase;
             letter-spacing: 1px;
+            color: #666;
         }
 
         .project-description {
-            font-size: 0.85em;
+            font-size: 0.8em;
             line-height: 1.4;
         }
 
-        .navigation {
+        .footer-section {
+            grid-column: 1 / -1;
             background: #f8f8f6;
-            border: 2px solid #2c2c2c;
-            padding: 20px;
+            border-top: 3px solid #2c2c2c;
+            padding: 15px 40px;
             text-align: center;
-            position: relative;
-        }
-
-        .navigation::before {
-            content: 'NAVIGATION';
-            background: #f8f8f6;
-            padding: 5px 15px;
-            position: absolute;
-            top: -15px;
-            left: 20px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 0.9em;
-            border: 2px solid #2c2c2c;
         }
 
         .nav-links {
             display: flex;
             justify-content: center;
-            gap: 30px;
+            gap: 25px;
             flex-wrap: wrap;
-            margin-top: 10px;
         }
 
         .nav-link {
@@ -337,9 +273,9 @@
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 1px;
-            font-size: 0.9em;
+            font-size: 0.85em;
             border: 1px solid #2c2c2c;
-            padding: 8px 15px;
+            padding: 6px 12px;
             background: rgba(255,255,255,0.5);
             transition: all 0.2s ease;
         }
@@ -349,74 +285,67 @@
             color: #f8f8f6;
         }
 
-        .annotation {
-            position: absolute;
-            font-size: 8px;
+        .globe-controls {
+            text-align: center;
+            font-size: 0.7em;
             text-transform: uppercase;
             letter-spacing: 1px;
+            color: #666;
         }
 
-        .ann-1 { top: 20px; left: -80px; transform: rotate(-90deg); }
-        .ann-2 { bottom: 20px; right: -80px; transform: rotate(90deg); }
-
-        @media (max-width: 768px) {
-            .section-grid {
+        @media (max-width: 1200px) {
+            .main-container {
                 grid-template-columns: 1fr;
+                grid-template-rows: auto auto 1fr auto;
             }
             
-            .projects-grid {
-                grid-template-columns: 1fr;
+            .center-panel {
+                order: 2;
             }
             
-            .contact-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 15px;
+            .left-panel {
+                order: 3;
+                border-right: none;
+                border-top: 3px solid #2c2c2c;
             }
             
-            .nav-links {
+            .right-panel {
+                order: 4;
+                border-left: none;
+                border-top: 3px solid #2c2c2c;
+            }
+            
+            .contact-info {
                 flex-direction: column;
-                gap: 15px;
-            }
-            
-            h1 {
-                font-size: 2.2em;
-                letter-spacing: 2px;
-            }
-            
-            .ann-1, .ann-2 {
-                display: none;
+                gap: 10px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="title-block blueprint-border">
-            <div class="drawing-number">DWG-2025-001</div>
-            <h1>Your Name</h1>
-            <p class="subtitle">Geospatial Data Scientist</p>
-            <div class="divider"></div>
-            <div class="contact-grid">
-                <div class="contact-item">Email<br>your.email@example.com</div>
-                <div class="contact-item">Location<br>Your City, Country</div>
-                <div class="contact-item">LinkedIn<br>/in/yourprofile</div>
-                <div class="contact-item">GitHub<br>/yourusername</div>
+    <div class="main-container">
+        <div class="header-section">
+            <div class="title-block">
+                <h1>Your Name</h1>
+                <p class="subtitle">Geospatial Data Scientist</p>
+                <div class="contact-info">
+                    <span>your.email@example.com</span>
+                    <span>Your City, Country</span>
+                    <span>LinkedIn: /in/yourprofile</span>
+                    <span>GitHub: /yourusername</span>
+                </div>
             </div>
-            <div class="annotation ann-1">Professional Portfolio</div>
-            <div class="annotation ann-2">Scale: 1:1</div>
         </div>
 
-        <div class="section-grid">
-            <div class="section blueprint-border">
+        <div class="left-panel">
+            <div class="section">
                 <div class="section-title">Profile</div>
                 <p>Geospatial data scientist specializing in spatial analysis, remote sensing, and machine learning applications. Expert in transforming complex geographic datasets into actionable insights for environmental monitoring and urban planning initiatives.</p>
-                <div class="dimension-line"></div>
-                <p>Combining traditional GIS methodologies with modern data science techniques to bridge spatial thinking and statistical modeling for real-world problem solving.</p>
             </div>
 
-            <div class="section blueprint-border">
-                <div class="section-title">Technical Specifications</div>
-                <div class="skills-blueprint">
+            <div class="section">
+                <div class="section-title">Technical Skills</div>
+                <div class="skills-grid">
                     <div class="skill-box">Python</div>
                     <div class="skill-box">R</div>
                     <div class="skill-box">QGIS</div>
@@ -431,28 +360,37 @@
                     <div class="skill-box">Spatial Stats</div>
                 </div>
             </div>
-        </div>
 
-        <div class="section-grid">
-            <div class="section blueprint-border">
-                <div class="section-title">Professional Experience</div>
+            <div class="section">
+                <div class="section-title">Experience</div>
                 <div class="experience-item">
                     <div class="experience-title">Senior Geospatial Data Scientist</div>
                     <div class="experience-company">Company Name</div>
                     <div class="experience-date">2022 - Present</div>
-                    <p>Leading spatial analysis projects for environmental consulting, developing automated workflows for satellite imagery processing and analysis.</p>
+                    <p class="experience-description">Leading spatial analysis projects for environmental consulting, developing automated workflows for satellite imagery processing.</p>
                 </div>
                 
                 <div class="experience-item">
                     <div class="experience-title">GIS Analyst</div>
                     <div class="experience-company">Previous Company</div>
                     <div class="experience-date">2020 - 2022</div>
-                    <p>Performed spatial analysis for urban planning projects, created interactive maps and comprehensive data visualizations.</p>
+                    <p class="experience-description">Performed spatial analysis for urban planning projects, created interactive maps and data visualizations.</p>
                 </div>
             </div>
+        </div>
 
-            <div class="section blueprint-border">
-                <div class="section-title">Education & Certifications</div>
+        <div class="center-panel">
+            <div class="globe-container">
+                <svg id="globe"></svg>
+            </div>
+            <div class="globe-controls">
+                Click and drag to rotate • Scroll to zoom
+            </div>
+        </div>
+
+        <div class="right-panel">
+            <div class="section">
+                <div class="section-title">Education</div>
                 <div class="experience-item">
                     <div class="experience-title">M.S. Geographic Information Science</div>
                     <div class="experience-company">University Name</div>
@@ -471,32 +409,30 @@
                     <div class="experience-date">2023</div>
                 </div>
             </div>
-        </div>
 
-        <div class="projects-section blueprint-border">
-            <div class="projects-title">Project Portfolio</div>
-            <div class="projects-grid">
+            <div class="section">
+                <div class="section-title">Featured Projects</div>
                 <div class="project-card">
                     <div class="project-title">Urban Heat Island Analysis</div>
-                    <div class="project-tech">Python • Landsat • GeoPandas • Matplotlib</div>
-                    <p class="project-description">Comprehensive analysis of urban temperature patterns using satellite imagery to identify heat islands and develop mitigation strategies for municipal planning departments.</p>
+                    <div class="project-tech">Python • Landsat • GeoPandas</div>
+                    <p class="project-description">Analysis of urban temperature patterns using satellite imagery to identify heat islands and develop mitigation strategies.</p>
                 </div>
                 
                 <div class="project-card">
-                    <div class="project-title">Deforestation Monitoring System</div>
-                    <div class="project-tech">Google Earth Engine • JavaScript • Sentinel-2</div>
-                    <p class="project-description">Real-time forest cover monitoring system utilizing machine learning classification algorithms for automated change detection in satellite imagery datasets.</p>
+                    <div class="project-title">Deforestation Monitoring</div>
+                    <div class="project-tech">Google Earth Engine • Sentinel-2</div>
+                    <p class="project-description">Real-time forest monitoring system using machine learning classification for automated change detection.</p>
                 </div>
                 
                 <div class="project-card">
-                    <div class="project-title">Flood Risk Prediction Model</div>
-                    <div class="project-tech">R • Spatial Regression • QGIS • Machine Learning</div>
-                    <p class="project-description">Predictive modeling framework integrating topographic, meteorological, and land use variables to assess flood vulnerability in coastal regions.</p>
+                    <div class="project-title">Flood Risk Prediction</div>
+                    <div class="project-tech">R • Spatial Regression • ML</div>
+                    <p class="project-description">Predictive modeling framework integrating topographic and meteorological data for flood vulnerability assessment.</p>
                 </div>
             </div>
         </div>
 
-        <div class="navigation blueprint-border">
+        <div class="footer-section">
             <div class="nav-links">
                 <a href="/" class="nav-link">Home</a>
                 <a href="/projects/" class="nav-link">Projects</a>
@@ -506,5 +442,156 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // Globe setup
+        const width = 380;
+        const height = 340;
+        
+        const svg = d3.select("#globe")
+            .attr("width", width)
+            .attr("height", height);
+
+        const projection = d3.geoOrthographic()
+            .scale(120)
+            .translate([width / 2, height / 2])
+            .clipAngle(90);
+
+        const path = d3.geoPath().projection(projection);
+
+        // Create globe background
+        svg.append("circle")
+            .attr("cx", width / 2)
+            .attr("cy", height / 2)
+            .attr("r", 120)
+            .attr("fill", "rgba(255,255,255,0.1)")
+            .attr("stroke", "#2c2c2c")
+            .attr("stroke-width", 2);
+
+        // Add graticule
+        const graticule = d3.geoGraticule();
+        svg.append("path")
+            .datum(graticule)
+            .attr("d", path)
+            .attr("fill", "none")
+            .attr("stroke", "#2c2c2c")
+            .attr("stroke-width", 0.5)
+            .attr("opacity", 0.3);
+
+        // Create simple world data
+        const worldData = {
+            type: "FeatureCollection",
+            features: [
+                // Simplified continents as approximate polygons
+                {
+                    type: "Feature",
+                    geometry: {
+                        type: "Polygon",
+                        coordinates: [[
+                            [-100, 50], [-60, 50], [-60, 10], [-100, 10], [-100, 50]
+                        ]]
+                    }
+                },
+                {
+                    type: "Feature",
+                    geometry: {
+                        type: "Polygon",
+                        coordinates: [[
+                            [-20, 60], [40, 60], [40, 30], [-20, 30], [-20, 60]
+                        ]]
+                    }
+                },
+                {
+                    type: "Feature",
+                    geometry: {
+                        type: "Polygon",
+                        coordinates: [[
+                            [80, 50], [140, 50], [140, 10], [80, 10], [80, 50]
+                        ]]
+                    }
+                }
+            ]
+        };
+
+        // Add continents
+        svg.selectAll(".continent")
+            .data(worldData.features)
+            .enter().append("path")
+            .attr("class", "continent")
+            .attr("d", path)
+            .attr("fill", "rgba(44,44,44,0.2)")
+            .attr("stroke", "#2c2c2c")
+            .attr("stroke-width", 1);
+
+        // Add some cities as points
+        const cities = [
+            {name: "New York", coords: [-74, 40.7]},
+            {name: "London", coords: [0, 51.5]},
+            {name: "Tokyo", coords: [139.7, 35.7]},
+            {name: "Sydney", coords: [151.2, -33.9]},
+            {name: "São Paulo", coords: [-46.6, -23.5]}
+        ];
+
+        svg.selectAll(".city")
+            .data(cities)
+            .enter().append("circle")
+            .attr("class", "city")
+            .attr("r", 2)
+            .attr("fill", "#2c2c2c")
+            .attr("transform", d => {
+                const coords = projection(d.coords);
+                return coords ? `translate(${coords[0]}, ${coords[1]})` : null;
+            });
+
+        // Rotation animation
+        let rotation = [0, 0];
+        function rotate() {
+            rotation[0] += 0.5;
+            projection.rotate(rotation);
+            
+            svg.selectAll("path").attr("d", path);
+            svg.selectAll(".city")
+                .attr("transform", d => {
+                    const coords = projection(d.coords);
+                    return coords ? `translate(${coords[0]}, ${coords[1]})` : null;
+                })
+                .style("display", d => {
+                    const coords = projection(d.coords);
+                    return coords ? "block" : "none";
+                });
+        }
+
+        // Auto-rotation
+        setInterval(rotate, 100);
+
+        // Mouse interaction
+        let isDragging = false;
+        svg.call(d3.drag()
+            .on("start", function() {
+                isDragging = true;
+            })
+            .on("drag", function(event) {
+                if (isDragging) {
+                    rotation[0] += event.dx * 0.5;
+                    rotation[1] -= event.dy * 0.5;
+                    rotation[1] = Math.max(-90, Math.min(90, rotation[1]));
+                    projection.rotate(rotation);
+                    
+                    svg.selectAll("path").attr("d", path);
+                    svg.selectAll(".city")
+                        .attr("transform", d => {
+                            const coords = projection(d.coords);
+                            return coords ? `translate(${coords[0]}, ${coords[1]})` : null;
+                        })
+                        .style("display", d => {
+                            const coords = projection(d.coords);
+                            return coords ? "block" : "none";
+                        });
+                }
+            })
+            .on("end", function() {
+                isDragging = false;
+            }));
+    </script>
 </body>
 </html>
