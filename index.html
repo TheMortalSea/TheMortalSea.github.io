@@ -13,13 +13,13 @@
         }
 
         body {
-            font-family: 'Courier New', monospace;
-            line-height: 1.6;
+            font-family: 'Arial', sans-serif;
+            line-height: 1.5;
             color: #2c2c2c;
             background: #f8f8f6;
             background-image: 
-                radial-gradient(circle at 1px 1px, rgba(44,44,44,0.15) 1px, transparent 0);
-            background-size: 20px 20px;
+                radial-gradient(circle at 1px 1px, rgba(44,44,44,0.1) 1px, transparent 0);
+            background-size: 25px 25px;
         }
 
         .container {
@@ -50,39 +50,29 @@
         }
 
         .title-block {
-            background: #f8f8f6;
+            text-align: center;
             border: 2px solid #2c2c2c;
-            padding: 30px;
-            margin-bottom: 40px;
+            padding: 25px;
+            background: rgba(255,255,255,0.3);
             position: relative;
         }
 
-        .title-block::after {
-            content: 'SHEET 01 OF 01';
+        .title-block::before {
+            content: '';
             position: absolute;
-            bottom: 8px;
-            right: 15px;
-            font-size: 10px;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        .drawing-number {
-            position: absolute;
-            top: 8px;
-            right: 15px;
-            font-size: 10px;
-            font-weight: bold;
-            letter-spacing: 1px;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border: 1px solid #2c2c2c;
         }
 
         h1 {
             font-size: 2.8em;
             font-weight: bold;
             text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 5px;
-            text-align: center;
+            letter-spacing: 4px;
+            margin-bottom: 8px;
         }
 
         .subtitle {
@@ -155,7 +145,7 @@
         }
 
         .section {
-            background: #f8f8f6;
+            background: rgba(255,255,255,0.2);
             border: 2px solid #2c2c2c;
             margin-bottom: 30px;
             padding: 25px;
@@ -175,33 +165,7 @@
             border: 2px solid #2c2c2c;
         }
 
-        .dimension-line {
-            position: relative;
-            margin: 15px 0;
-        }
-
-        .dimension-line::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: #2c2c2c;
-        }
-
-        .dimension-line::after {
-            content: '←―――――――――――――――→';
-            position: absolute;
-            top: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #f8f8f6;
-            padding: 0 10px;
-            font-size: 12px;
-        }
-
-        .skills-blueprint {
+        .skills-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 10px;
@@ -215,38 +179,14 @@
             font-size: 0.8em;
             text-transform: uppercase;
             letter-spacing: 1px;
-            background: rgba(255,255,255,0.3);
-            position: relative;
-        }
-
-        .skill-box::before {
-            content: '○';
-            position: absolute;
-            left: 3px;
-            top: 3px;
-            font-size: 6px;
+            background: rgba(255,255,255,0.4);
         }
 
         .experience-item {
             margin-bottom: 20px;
             padding: 15px;
             border: 1px dashed #2c2c2c;
-            background: rgba(255,255,255,0.2);
-            position: relative;
-        }
-
-        .experience-item::before {
-            content: counter(exp-counter, decimal-leading-zero);
-            counter-increment: exp-counter;
-            position: absolute;
-            top: 5px;
-            right: 10px;
-            font-size: 10px;
-            font-weight: bold;
-        }
-
-        .section:nth-of-type(2) {
-            counter-reset: exp-counter;
+            background: rgba(255,255,255,0.3);
         }
 
         .experience-title {
@@ -292,7 +232,6 @@
             right: 4px;
             bottom: 4px;
             border: 1px dashed #2c2c2c;
-            pointer-events: none;
         }
 
         .project-title {
@@ -308,6 +247,7 @@
             margin-bottom: 10px;
             text-transform: uppercase;
             letter-spacing: 1px;
+            color: #666;
         }
 
         .project-description {
@@ -320,21 +260,6 @@
             border-top: 3px solid #2c2c2c;
             padding: 25px 40px;
             text-align: center;
-            position: relative;
-        }
-
-        .navigation::before {
-            content: 'NAVIGATION';
-            background: #f8f8f6;
-            padding: 5px 15px;
-            position: absolute;
-            top: -15px;
-            left: 20px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 0.9em;
-            border: 2px solid #2c2c2c;
         }
 
         .nav-links {
@@ -342,7 +267,6 @@
             justify-content: center;
             gap: 30px;
             flex-wrap: wrap;
-            margin-top: 10px;
         }
 
         .nav-link {
@@ -415,8 +339,6 @@
                     <span>GitHub: /TheMortalSea</span>
                 </div>
             </div>
-            <div class="annotation ann-1">Professional Portfolio</div>
-            <div class="annotation ann-2">Scale: 1:1</div>
         </div>
 
         <div class="globe-section">
@@ -473,7 +395,6 @@
                     </div>
                 </div>
             </div>
-        </div>
 
             <div>
                 <div class="section">
@@ -520,7 +441,7 @@
             </div>
         </div>
 
-        <div class="navigation blueprint-border">
+        <div class="footer-section">
             <div class="nav-links">
                 <a href="/" class="nav-link">Home</a>
                 <a href="/ambulance_desert.html" class="nav-link">Projects</a>
