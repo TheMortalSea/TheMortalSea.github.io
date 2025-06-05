@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Robb Young - Geospatial Data Scientist</title>
+<<<<<<< HEAD
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+=======
+>>>>>>> parent of 148ca57 (Update index.html)
     <style>
         * {
             margin: 0;
@@ -13,16 +16,21 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.5;
+            font-family: 'Courier New', monospace;
+            line-height: 1.6;
             color: #2c2c2c;
             background: #f8f8f6;
+<<<<<<< HEAD
+=======
+            min-height: 100vh;
+>>>>>>> parent of 148ca57 (Update index.html)
             background-image: 
-                radial-gradient(circle at 1px 1px, rgba(44,44,44,0.1) 1px, transparent 0);
-            background-size: 25px 25px;
+                radial-gradient(circle at 1px 1px, rgba(44,44,44,0.15) 1px, transparent 0);
+            background-size: 20px 20px;
         }
 
         .container {
+<<<<<<< HEAD
             max-width: 1400px;
             margin: 0 auto;
         }
@@ -47,51 +55,103 @@
             font-size: 9px;
             font-weight: bold;
             letter-spacing: 1px;
+=======
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
         }
 
-        .title-block {
-            text-align: center;
+        .blueprint-border {
             border: 2px solid #2c2c2c;
-            padding: 25px;
-            background: rgba(255,255,255,0.3);
             position: relative;
         }
 
-        .title-block::before {
+        .blueprint-border::before {
             content: '';
             position: absolute;
-            top: 5px;
-            left: 5px;
-            right: 5px;
-            bottom: 5px;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
             border: 1px solid #2c2c2c;
+            pointer-events: none;
+>>>>>>> parent of 148ca57 (Update index.html)
+        }
+
+        .title-block {
+            background: #f8f8f6;
+            border: 2px solid #2c2c2c;
+            padding: 30px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .title-block::after {
+            content: 'SHEET 01 OF 01';
+            position: absolute;
+            bottom: 8px;
+            right: 15px;
+            font-size: 10px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .drawing-number {
+            position: absolute;
+            top: 8px;
+            right: 15px;
+            font-size: 10px;
+            font-weight: bold;
+            letter-spacing: 1px;
         }
 
         h1 {
             font-size: 2.8em;
             font-weight: bold;
             text-transform: uppercase;
-            letter-spacing: 4px;
-            margin-bottom: 8px;
+            letter-spacing: 3px;
+            margin-bottom: 5px;
+            text-align: center;
         }
 
         .subtitle {
+<<<<<<< HEAD
             font-size: 1.2em;
+=======
+            text-align: center;
+            font-size: 1.1em;
+>>>>>>> parent of 148ca57 (Update index.html)
             letter-spacing: 2px;
             text-transform: uppercase;
             margin-bottom: 20px;
             font-weight: normal;
         }
 
+<<<<<<< HEAD
         .contact-info {
             display: flex;
             justify-content: center;
             gap: 50px;
+=======
+        .divider {
+            width: 100%;
+            height: 2px;
+            background: #2c2c2c;
+            margin: 20px 0;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            text-align: center;
+>>>>>>> parent of 148ca57 (Update index.html)
             font-size: 0.9em;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
+<<<<<<< HEAD
         .globe-section {
             padding: 40px;
             display: flex;
@@ -126,6 +186,19 @@
         #globe {
             width: 100%;
             height: 100%;
+=======
+        .contact-item {
+            border: 1px solid #2c2c2c;
+            padding: 10px;
+            background: rgba(255,255,255,0.5);
+        }
+
+        .section-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+>>>>>>> parent of 148ca57 (Update index.html)
         }
 
         .globe-controls {
@@ -145,15 +218,19 @@
         }
 
         .section {
-            background: rgba(255,255,255,0.2);
+            background: #f8f8f6;
             border: 2px solid #2c2c2c;
+<<<<<<< HEAD
             margin-bottom: 30px;
+=======
+>>>>>>> parent of 148ca57 (Update index.html)
             padding: 25px;
             position: relative;
         }
 
         .section-title {
             background: #f8f8f6;
+<<<<<<< HEAD
             padding: 8px 15px;
             position: absolute;
             top: -18px;
@@ -161,11 +238,46 @@
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 1.5px;
+=======
+            padding: 5px 15px;
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+>>>>>>> parent of 148ca57 (Update index.html)
             font-size: 0.9em;
             border: 2px solid #2c2c2c;
         }
 
-        .skills-grid {
+        .dimension-line {
+            position: relative;
+            margin: 15px 0;
+        }
+
+        .dimension-line::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #2c2c2c;
+        }
+
+        .dimension-line::after {
+            content: '←―――――――――――――――→';
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #f8f8f6;
+            padding: 0 10px;
+            font-size: 12px;
+        }
+
+        .skills-blueprint {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 10px;
@@ -179,14 +291,38 @@
             font-size: 0.8em;
             text-transform: uppercase;
             letter-spacing: 1px;
-            background: rgba(255,255,255,0.4);
+            background: rgba(255,255,255,0.3);
+            position: relative;
+        }
+
+        .skill-box::before {
+            content: '○';
+            position: absolute;
+            left: 3px;
+            top: 3px;
+            font-size: 6px;
         }
 
         .experience-item {
             margin-bottom: 20px;
             padding: 15px;
             border: 1px dashed #2c2c2c;
-            background: rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.2);
+            position: relative;
+        }
+
+        .experience-item::before {
+            content: counter(exp-counter, decimal-leading-zero);
+            counter-increment: exp-counter;
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .section:nth-of-type(2) {
+            counter-reset: exp-counter;
         }
 
         .experience-title {
@@ -194,7 +330,11 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             font-size: 0.9em;
+<<<<<<< HEAD
             margin-bottom: 5px;
+=======
+            margin-bottom: 3px;
+>>>>>>> parent of 148ca57 (Update index.html)
         }
 
         .experience-company {
@@ -205,33 +345,79 @@
         }
 
         .experience-date {
+<<<<<<< HEAD
             font-size: 0.75em;
+=======
+            font-size: 0.7em;
+>>>>>>> parent of 148ca57 (Update index.html)
             margin-bottom: 8px;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
+<<<<<<< HEAD
         .experience-description {
             font-size: 0.85em;
             line-height: 1.4;
+=======
+        .projects-section {
+            background: #f8f8f6;
+            border: 2px solid #2c2c2c;
+            padding: 30px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .projects-title {
+            background: #f8f8f6;
+            padding: 5px 15px;
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9em;
+            border: 2px solid #2c2c2c;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+>>>>>>> parent of 148ca57 (Update index.html)
         }
 
         .project-card {
             border: 2px solid #2c2c2c;
+<<<<<<< HEAD
             padding: 18px;
             background: rgba(255,255,255,0.3);
             margin-bottom: 20px;
+=======
+            padding: 20px;
+            background: rgba(255,255,255,0.3);
+>>>>>>> parent of 148ca57 (Update index.html)
             position: relative;
         }
 
         .project-card::before {
             content: '';
             position: absolute;
+<<<<<<< HEAD
             top: 4px;
             left: 4px;
             right: 4px;
             bottom: 4px;
+=======
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+>>>>>>> parent of 148ca57 (Update index.html)
             border: 1px dashed #2c2c2c;
+            pointer-events: none;
         }
 
         .project-title {
@@ -239,15 +425,22 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             font-size: 0.9em;
+<<<<<<< HEAD
             margin-bottom: 6px;
         }
 
         .project-tech {
             font-size: 0.75em;
+=======
+            margin-bottom: 8px;
+        }
+
+        .project-tech {
+            font-size: 0.7em;
+>>>>>>> parent of 148ca57 (Update index.html)
             margin-bottom: 10px;
             text-transform: uppercase;
             letter-spacing: 1px;
-            color: #666;
         }
 
         .project-description {
@@ -255,11 +448,33 @@
             line-height: 1.4;
         }
 
+<<<<<<< HEAD
         .footer-section {
             background: #f8f8f6;
             border-top: 3px solid #2c2c2c;
             padding: 25px 40px;
+=======
+        .navigation {
+            background: #f8f8f6;
+            border: 2px solid #2c2c2c;
+            padding: 20px;
+>>>>>>> parent of 148ca57 (Update index.html)
             text-align: center;
+            position: relative;
+        }
+
+        .navigation::before {
+            content: 'NAVIGATION';
+            background: #f8f8f6;
+            padding: 5px 15px;
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9em;
+            border: 2px solid #2c2c2c;
         }
 
         .nav-links {
@@ -267,6 +482,7 @@
             justify-content: center;
             gap: 30px;
             flex-wrap: wrap;
+            margin-top: 10px;
         }
 
         .nav-link {
@@ -276,8 +492,13 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             font-size: 0.9em;
+<<<<<<< HEAD
             border: 2px solid #2c2c2c;
             padding: 8px 16px;
+=======
+            border: 1px solid #2c2c2c;
+            padding: 8px 15px;
+>>>>>>> parent of 148ca57 (Update index.html)
             background: rgba(255,255,255,0.5);
             transition: all 0.2s ease;
         }
@@ -287,6 +508,7 @@
             color: #f8f8f6;
         }
 
+<<<<<<< HEAD
         @media (max-width: 1200px) {
             .content-grid {
                 grid-template-columns: 1fr;
@@ -311,10 +533,38 @@
             }
             
             .contact-info {
+=======
+        .annotation {
+            position: absolute;
+            font-size: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .ann-1 { top: 20px; left: -80px; transform: rotate(-90deg); }
+        .ann-2 { bottom: 20px; right: -80px; transform: rotate(90deg); }
+
+        @media (max-width: 768px) {
+            .section-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 15px;
+            }
+            
+            .nav-links {
+>>>>>>> parent of 148ca57 (Update index.html)
                 flex-direction: column;
                 gap: 15px;
             }
             
+<<<<<<< HEAD
             .skills-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -322,12 +572,22 @@
             h1 {
                 font-size: 1.8em;
                 letter-spacing: 2px;
+=======
+            h1 {
+                font-size: 2.2em;
+                letter-spacing: 2px;
+            }
+            
+            .ann-1, .ann-2 {
+                display: none;
+>>>>>>> parent of 148ca57 (Update index.html)
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
+<<<<<<< HEAD
         <div class="header-section">
             <div class="title-block">
                 <h1>Robb Young</h1>
@@ -338,9 +598,24 @@
                     <span>LinkedIn: /in/yourprofile</span>
                     <span>GitHub: /TheMortalSea</span>
                 </div>
+=======
+        <div class="title-block blueprint-border">
+            <div class="drawing-number">DWG-2025-001</div>
+            <h1>Your Name</h1>
+            <p class="subtitle">Geospatial Data Scientist</p>
+            <div class="divider"></div>
+            <div class="contact-grid">
+                <div class="contact-item">Email<br>your.email@example.com</div>
+                <div class="contact-item">Location<br>Your City, Country</div>
+                <div class="contact-item">LinkedIn<br>/in/yourprofile</div>
+                <div class="contact-item">GitHub<br>/yourusername</div>
+>>>>>>> parent of 148ca57 (Update index.html)
             </div>
+            <div class="annotation ann-1">Professional Portfolio</div>
+            <div class="annotation ann-2">Scale: 1:1</div>
         </div>
 
+<<<<<<< HEAD
         <div class="globe-section">
             <div>
                 <div class="globe-container">
@@ -348,10 +623,54 @@
                 </div>
                 <div class="globe-controls">
                     Click and drag to rotate • Scroll to zoom
+=======
+        <div class="section-grid">
+            <div class="section blueprint-border">
+                <div class="section-title">Profile</div>
+                <p>Geospatial data scientist specializing in spatial analysis, remote sensing, and machine learning applications. Expert in transforming complex geographic datasets into actionable insights for environmental monitoring and urban planning initiatives.</p>
+                <div class="dimension-line"></div>
+                <p>Combining traditional GIS methodologies with modern data science techniques to bridge spatial thinking and statistical modeling for real-world problem solving.</p>
+            </div>
+
+            <div class="section blueprint-border">
+                <div class="section-title">Technical Specifications</div>
+                <div class="skills-blueprint">
+                    <div class="skill-box">Python</div>
+                    <div class="skill-box">R</div>
+                    <div class="skill-box">QGIS</div>
+                    <div class="skill-box">ArcGIS</div>
+                    <div class="skill-box">PostGIS</div>
+                    <div class="skill-box">GDAL</div>
+                    <div class="skill-box">GeoPandas</div>
+                    <div class="skill-box">Rasterio</div>
+                    <div class="skill-box">Google EE</div>
+                    <div class="skill-box">ML/AI</div>
+                    <div class="skill-box">Remote Sensing</div>
+                    <div class="skill-box">Spatial Stats</div>
                 </div>
             </div>
         </div>
 
+        <div class="section-grid">
+            <div class="section blueprint-border">
+                <div class="section-title">Professional Experience</div>
+                <div class="experience-item">
+                    <div class="experience-title">Senior Geospatial Data Scientist</div>
+                    <div class="experience-company">Company Name</div>
+                    <div class="experience-date">2022 - Present</div>
+                    <p>Leading spatial analysis projects for environmental consulting, developing automated workflows for satellite imagery processing and analysis.</p>
+                </div>
+                
+                <div class="experience-item">
+                    <div class="experience-title">GIS Analyst</div>
+                    <div class="experience-company">Previous Company</div>
+                    <div class="experience-date">2020 - 2022</div>
+                    <p>Performed spatial analysis for urban planning projects, created interactive maps and comprehensive data visualizations.</p>
+>>>>>>> parent of 148ca57 (Update index.html)
+                </div>
+            </div>
+
+<<<<<<< HEAD
         <div class="content-grid">
             <div>
                 <div class="section">
@@ -377,6 +696,14 @@
                         <div class="skill-box">Remote Sensing</div>
                         <div class="skill-box">Spatial Stats</div>
                     </div>
+=======
+            <div class="section blueprint-border">
+                <div class="section-title">Education & Certifications</div>
+                <div class="experience-item">
+                    <div class="experience-title">M.S. Geographic Information Science</div>
+                    <div class="experience-company">University Name</div>
+                    <div class="experience-date">2018 - 2020</div>
+>>>>>>> parent of 148ca57 (Update index.html)
                 </div>
 
                 <div class="section">
@@ -396,7 +723,9 @@
                     </div>
                 </div>
             </div>
+        </div>
 
+<<<<<<< HEAD
             <div>
                 <div class="section">
                     <div class="section-title">Education & Certifications</div>
@@ -438,11 +767,32 @@
                         <div class="project-tech">R • Spatial Regression • QGIS • Machine Learning</div>
                         <p class="project-description">Predictive modeling framework integrating topographic, meteorological, and land use variables to assess flood vulnerability in coastal regions.</p>
                     </div>
+=======
+        <div class="projects-section blueprint-border">
+            <div class="projects-title">Project Portfolio</div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-title">Urban Heat Island Analysis</div>
+                    <div class="project-tech">Python • Landsat • GeoPandas • Matplotlib</div>
+                    <p class="project-description">Comprehensive analysis of urban temperature patterns using satellite imagery to identify heat islands and develop mitigation strategies for municipal planning departments.</p>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-title">Deforestation Monitoring System</div>
+                    <div class="project-tech">Google Earth Engine • JavaScript • Sentinel-2</div>
+                    <p class="project-description">Real-time forest cover monitoring system utilizing machine learning classification algorithms for automated change detection in satellite imagery datasets.</p>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-title">Flood Risk Prediction Model</div>
+                    <div class="project-tech">R • Spatial Regression • QGIS • Machine Learning</div>
+                    <p class="project-description">Predictive modeling framework integrating topographic, meteorological, and land use variables to assess flood vulnerability in coastal regions.</p>
+>>>>>>> parent of 148ca57 (Update index.html)
                 </div>
             </div>
         </div>
 
-        <div class="footer-section">
+        <div class="navigation blueprint-border">
             <div class="nav-links">
                 <a href="/" class="nav-link">Home</a>
                 <a href="/projects/" class="nav-link">Projects</a>
@@ -452,6 +802,7 @@
             </div>
         </div>
     </div>
+<<<<<<< HEAD
 
     <script>
         // Globe setup
@@ -638,5 +989,7 @@
                 setTimeout(() => { autoRotate = true; }, 3000);
             }));
     </script>
+=======
+>>>>>>> parent of 148ca57 (Update index.html)
 </body>
 </html>
