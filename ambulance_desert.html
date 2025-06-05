@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Basic Leaflet Map</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" />
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        
+        #map {
+            height: 500px;
+            width: 100%;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>My First Leaflet Map</h1>
+    <div id="map"></div>
+
+    <!-- Leaflet JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+    
+    <script>
+        // Create a map and set its view to a specific location and zoom level
+        var map = L.map('map').setView([43.4642, 142.8277], 7);
+        
+        // Add a tile layer (the map background)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+        
+        // Add a simple marker
+        var marker = L.marker([43.0642, 141.3469]).addTo(map);
+        
+        // Add a popup to the marker
+        marker.bindPopup("Hello! This is Sapporo, Hokkaido.");
+        
+        // Add a circle
+        var circle = L.circle([43.4642, 142.8277], {
+            color: 'red',
+            fillColor: '#f03',
+            fillOpacity: 0.5,
+            radius: 50000
+        }).addTo(map);
+        
+        // Add popup to circle
+        circle.bindPopup("This circle covers central Hokkaido");
+        
+        // Add a simple popup on map click
+        map.on('click', function(e) {
+            L.popup()
+                .setLatLng(e.latlng)
+                .setContent("You clicked at " + e.latlng.toString())
+                .openOn(map);
+        });
+    </script>
+</body>
+</html>
