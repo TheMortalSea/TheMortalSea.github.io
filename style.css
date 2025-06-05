@@ -1,0 +1,164 @@
+/* --- Global Resets & Base Styles --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif; /* A clean, modern sans-serif font */
+    line-height: 1.6;
+    color: #333; /* Dark grey for text - good contrast */
+    background-color: #f8f8f8; /* Very light grey background */
+    display: flex;
+    min-height: 100vh;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    flex-grow: 1; /* Ensures the container takes up full viewport height */
+}
+
+/* --- Left Half Styling --- */
+.left-half {
+    width: 50%;
+    background-color: #ffffff; /* White background for the content area */
+    padding: 60px 40px; /* Generous padding */
+    overflow-y: auto; /* Allow scrolling if content exceeds height */
+    border-right: 1px solid #e0e0e0; /* Subtle separator line */
+    display: flex;
+    flex-direction: column;
+}
+
+.main-header {
+    margin-bottom: 40px;
+    border-bottom: 1px solid #eee; /* Subtle underline for the header */
+    padding-bottom: 20px;
+}
+
+.main-header h1 {
+    font-size: 2.8em; /* Large, but not overly so */
+    font-weight: 300; /* Lighter font weight for a refined look */
+    letter-spacing: 1px;
+    color: #1a1a1a;
+    margin-bottom: 5px;
+}
+
+.main-header h2 {
+    font-size: 1.2em;
+    font-weight: 300;
+    color: #555;
+    letter-spacing: 0.5px;
+}
+
+section {
+    margin-bottom: 35px;
+}
+
+h3 {
+    font-size: 1.4em;
+    font-weight: 500; /* Slightly bolder for section titles */
+    margin-bottom: 15px;
+    color: #2c2c2c;
+    text-transform: uppercase; /* Common in architectural styles */
+    letter-spacing: 0.8px;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 8px;
+}
+
+p {
+    font-size: 0.95em;
+    font-weight: 300;
+    color: #4a4a4a;
+    margin-bottom: 10px;
+}
+
+.project-item {
+    margin-bottom: 25px;
+    padding-left: 10px; /* Slight indent for project items */
+    border-left: 2px solid #e0e0e0; /* Subtle visual cue */
+}
+
+.project-item h4 {
+    font-size: 1.1em;
+    font-weight: 400;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.project-item p {
+    font-size: 0.9em;
+    color: #555;
+}
+
+a {
+    color: #007bff; /* A standard, accessible blue for links */
+    text-decoration: none;
+    font-weight: 400;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #0056b3;
+}
+
+.contact p a {
+    display: block; /* Make links in contact section stack vertically */
+    margin-bottom: 5px;
+}
+
+.contact {
+    margin-top: auto; /* Pushes the contact section to the bottom */
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+
+/* --- Right Half Styling --- */
+.right-half {
+    width: 50%;
+    background-color: #f0f0f0; /* Slightly different background for visual separation */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Important if your D3.js viz might overflow */
+    position: relative; /* For potential absolute positioning of child elements */
+}
+
+#dynamic-content-placeholder {
+    text-align: center;
+    color: #888;
+    font-size: 1.2em;
+    /* You'll replace this with your actual dynamic content styling */
+}
+
+/* --- Responsive Design (Basic Example) --- */
+@media (max-width: 900px) { /* Adjust breakpoint as needed */
+    .container {
+        flex-direction: column; /* Stack halves vertically on smaller screens */
+    }
+
+    .left-half,
+    .right-half {
+        width: 100%;
+    }
+
+    .left-half {
+        border-right: none;
+        border-bottom: 1px solid #e0e0e0; /* Separator when stacked */
+        min-height: 50vh; /* Ensure it takes some space */
+    }
+
+    .right-half {
+        min-height: 300px; /* Give some default height to the dynamic content area */
+    }
+
+    .main-header h1 {
+        font-size: 2.2em;
+    }
+
+    .main-header h2 {
+        font-size: 1em;
+    }
+}
