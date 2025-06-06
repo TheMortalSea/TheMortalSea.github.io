@@ -162,3 +162,49 @@ a:hover {
         font-size: 1em;
     }
 }
+
+/* --- Globe Styling --- */
+.right-half {
+    /* (This section already exists, ensure it has these properties) */
+    width: 50%;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+#globe-container svg {
+    width: 100%;
+    height: 100%;
+}
+
+.sphere { /* The background circle of the globe */
+    fill: #d1e0ec; /* A nice light blue for water */
+}
+
+.graticule { /* The gridlines on the globe */
+    fill: none;
+    stroke: #ffffff;
+    stroke-width: .5px;
+    stroke-opacity: 0.5;
+}
+
+.land { /* The countries/continents */
+    fill: #b0c4b1; /* A muted, earthy green */
+    stroke: #f0f0f0; /* Same as the background for a subtle border */
+    stroke-width: 0.7px;
+}
+
+.point-nepal {
+    fill: #e63946; /* A strong red to stand out */
+    stroke: #ffffff;
+    stroke-width: 1px;
+    cursor: pointer;
+    transition: r 0.2s ease-in-out; /* Smooth transition for radius on hover */
+}
+
+.point-nepal:hover {
+    r: 10; /* Make the point larger on hover */
+}
