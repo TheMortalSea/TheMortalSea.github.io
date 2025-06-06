@@ -192,9 +192,9 @@ a:hover {
 }
 
 .land { /* The countries/continents */
-    fill: #b0c4b1; /* A muted, earthy green */
-    stroke: #f0f0f0; /* Same as the background for a subtle border */
-    stroke-width: 0.7px;
+    fill: #b0c4b1;       /* A muted, earthy green */
+    stroke: #666;        /* A visible dark grey for country outlines */
+    stroke-width: 0.5px; /* A thinner line for a cleaner look */
 }
 
 .point-nepal {
