@@ -93,7 +93,12 @@ document.addEventListener('DOMContentLoaded', () => {
             .selectAll("path")
             .data(topojson.feature(world, world.objects.countries).features)
             .enter().append("path")
-            .attr("class", "land")
+            .attr("class", "land") // We can keep the class for semantics
+            // --- ADDED/CHANGED LINES ---
+            .attr("fill", "#b0c4b1") // Set a default green-ish fill color
+            .attr("stroke", "#666")  // Set a darker grey for the country borders
+            .attr("stroke-width", 0.5)
+            // --- END OF CHANGES ---
             .attr("d", path);
 
         // Draw Nepal Point
