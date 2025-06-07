@@ -42,24 +42,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let rotation_start;
     let rotation_velocity = { x: 0, y: 0 };
-    let autorotate;
-
-    function startAutorotation() {
-        autorotate = d3.interval(() => {
-            const current_rotation = projection.rotate();
-            projection.rotate([current_rotation[0] + 0.2, current_rotation[1]]); // Adjust speed here
-            updateGlobe();
-        }, 50);
-    }
     
-    function stopAutorotation() {
-        if (autorotate) autorotate.stop();
-        autorotate = null;
-    }
-
     // --- Drag Functions ---
     function dragstarted() {
-        stopAutorotation();
         rotation_start = projection.rotate();
     }
 
@@ -73,8 +58,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     function dragended() {
-        // Optional: restart autorotation after a delay
-        setTimeout(startAutorotation, 2000);
     }
 
 
@@ -118,7 +101,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Initial render and start rotation
         updateGlobe();
-        startAutorotation();
     });
 
     // --- Update Function ---
