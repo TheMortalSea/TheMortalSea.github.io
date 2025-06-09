@@ -117,7 +117,7 @@ a:hover {
 
 /* --- Right Half Styling --- */
 .right-half {
-    width: 50%;
+    width: 60%;
     background-color: #f0f0f0; /* Slightly different background for visual separation */
     display: flex;
     justify-content: center;
@@ -166,7 +166,7 @@ a:hover {
 /* --- Globe Styling --- */
 .right-half {
     /* (This section already exists, ensure it has these properties) */
-    width: 50%;
+    width: 60%;
     background-color: #f0f0f0;
     display: flex;
     justify-content: center;
