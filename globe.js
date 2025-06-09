@@ -40,19 +40,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     svg.call(drag);
 
-    let rotation_start;
     let rotation_velocity = { x: 0, y: 0 };
     
     // --- Drag Functions ---
     function dragstarted() {
-        rotation_start = projection.rotate();
+        // There used to be an automated rotation
     }
 
+    // THE CORRECTED LOGIC
     function dragged(event) {
-        const k = 0.5; // Sensitivity of dragging
+        const current_rotation = projection.rotate(); // Get the globe's current rotation
+        const k = 0.5; // Drag sensitivity
         projection.rotate([
-            rotation_start[0] + event.dx * k,
-            rotation_start[1] - event.dy * k
+            current_rotation[0] + event.dx * k, // Add the change in X to the current rotation
+            current_rotation[1] - event.dy * k  // Add the change in Y to the current rotation
         ]);
         updateGlobe();
     }
