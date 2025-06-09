@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const projection = d3.geoOrthographic()
         .scale(Math.min(width, height) / 2 - 20)
         .translate([width / 2, height / 2])
-        .clipAngle(90); // Only show the front hemisphere
+        .clipAngle(90);
 
     const path = d3.geoPath().projection(projection);
 
@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
         .attr("height", height);
 
     // --- Data for Nepal ---
-    // GeoJSON Point format: [longitude, latitude]
     const nepalCoordinates = [85.3240, 27.7172]; 
     const nepalPoint = {
         type: "Point",
@@ -35,19 +34,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Drag Behavior ---
     const drag = d3.drag()
         .on("start", dragstarted)
-        .on("drag", dragged)
-        .on("end", dragended);
+        .on("drag", dragged);
 
     svg.call(drag);
 
-    let rotation_velocity = { x: 0, y: 0 };
-    
     // --- Drag Functions ---
     function dragstarted() {
-        // There used to be an automated rotation
+        // This function is required to initialize the drag gesture, but we don't need to store state here anymore.
     }
 
-    // THE CORRECTED LOGIC
     function dragged(event) {
         const current_rotation = projection.rotate(); // Get the globe's current rotation
         const k = 0.5; // Drag sensitivity
@@ -56,9 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
             current_rotation[1] - event.dy * k  // Add the change in Y to the current rotation
         ]);
         updateGlobe();
-    }
-    
-    function dragended() {
     }
 
 
@@ -77,41 +69,33 @@ document.addEventListener('DOMContentLoaded', () => {
             .selectAll("path")
             .data(topojson.feature(world, world.objects.countries).features)
             .enter().append("path")
-            .attr("class", "land") // We can keep the class for semantics
-            // --- ADDED/CHANGED LINES ---
-            .attr("fill", "#b0c4b1") // Set a default green-ish fill color
-            .attr("stroke", "#666")  // Set a darker grey for the country borders
+            .attr("class", "land")
+            .attr("fill", "#b0c4b1")
+            .attr("stroke", "#666")
             .attr("stroke-width", 0.5)
-            // --- END OF CHANGES ---
             .attr("d", path);
 
         // Draw Nepal Point
         point = svg.append("path")
             .datum(nepalPoint)
             .attr("class", "point-nepal")
-            .attr("d", path.pointRadius(6)) // Initial radius of the point
+            .attr("d", path.pointRadius(6))
             .on("click", (event, d) => {
-                // Check if the point is visible before navigating
-                const [x, y] = projection(d.coordinates);
                 const gdistance = d3.geoDistance(d.coordinates, [-projection.rotate()[0], -projection.rotate()[1]]);
-                
                 if (gdistance < Math.PI / 2) {
                     window.location.href = d.url;
                 }
             });
 
-        // Initial render and start rotation
+        // Initial render
         updateGlobe();
     });
 
     // --- Update Function ---
-    // This function redraws elements that change on rotation
     function updateGlobe() {
         land.attr("d", path);
         graticule.attr("d", path);
         point.attr("d", path.pointRadius(6));
-
-        // Hide the point if it's on the far side of the globe
         const gdistance = d3.geoDistance(nepalPoint.coordinates, [-projection.rotate()[0], -projection.rotate()[1]]);
         point.style("display", gdistance > Math.PI / 2 ? "none" : "inline");
     }
