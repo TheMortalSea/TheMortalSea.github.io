@@ -181,18 +181,18 @@ a:hover {
 }
 
 .sphere { /* The background circle of the globe */
-    fill: #d1e0ec; /* A nice light blue for water */
+    fill: #ffffff; /* A nice light blue for water */
 }
 
 .graticule { /* The gridlines on the globe */
     fill: none;
-    stroke: #ffffff;
+    stroke: #e0e0e0;
     stroke-width: .5px;
     stroke-opacity: 0.5;
 }
 
 .land { /* The countries/continents */
-    fill: #b0c4b1;       /* A muted, earthy green */
+    fill: #f4f4f4;       /* A muted, earthy green */
     stroke: #666;        /* A visible dark grey for country outlines */
     stroke-width: 0.5px; /* A thinner line for a cleaner look */
 }
