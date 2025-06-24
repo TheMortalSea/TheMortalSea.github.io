@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
         url: "nepal.html"
     };
 
-    // --- Globe Elements (will be populated later) ---
+    // --- Globe Elements ---
     const sphere = svg.append("path").attr("class", "sphere");
     const graticule = svg.append("path").attr("class", "graticule");
     let land, point;
@@ -38,21 +38,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
     svg.call(drag);
 
+    // --- Zoom Behavior ---
+    const zoom = d3.zoom()
+        .scaleExtent([0.5, 2]) // Set zoom limits (50% to 200% of original scale)
+        .on("zoom", zoomed);
+
+    svg.call(zoom);
+
+    function zoomed(event) {
+        const newScale = event.transform.k * ((Math.min(width, height) / 2 - 20) * 0.6);
+        projection.scale(newScale);
+        updateGlobe();
+    }
+
     // --- Drag Functions ---
     function dragstarted() {
-        // This function is required to initialize the drag gesture, but we don't need to store state here anymore.
+        // Initialize drag gesture
     }
 
     function dragged(event) {
-        const current_rotation = projection.rotate(); // Get the globe's current rotation
+        const current_rotation = projection.rotate();
         const k = 0.5; // Drag sensitivity
         projection.rotate([
-            current_rotation[0] + event.dx * k, // Add the change in X to the current rotation
-            current_rotation[1] - event.dy * k  // Add the change in Y to the current rotation
+            current_rotation[0] + event.dx * k,
+            current_rotation[1] - event.dy * k
         ]);
         updateGlobe();
     }
 
+    // --- Update Globe Rendering ---
+    function updateGlobe() {
+        sphere.attr("d", path({ type: "Sphere" }));
+        graticule.attr("d", path(d3.geoGraticule()()));
+        if (land) land.attr("d", path);
+        if (point) point.attr("d", path);
+    }
+
+    updateGlobe(); // Initial rendering
+});
 
     // --- Load Data and Draw ---
     const worldUrl = "https://unpkg.com/world-atlas@2/countries-110m.json";
@@ -110,4 +133,3 @@ document.addEventListener('DOMContentLoaded', () => {
         sphere.attr('d', path);
         updateGlobe();
     });
-});
