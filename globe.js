@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Projection and Path Generator ---
     const projection = d3.geoOrthographic()
-        .scale(Math.min(width, height) / 2 - 20)
+        .scale((Math.min(width, height) / 2 - 20) * 0.6)
         .translate([width / 2, height / 2])
         .clipAngle(90);
 
