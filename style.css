@@ -167,7 +167,7 @@ a:hover {
 .right-half {
     /* (This section already exists, ensure it has these properties) */
     width: 60%;
-    background-color: #f0f0f0;
+    background-color: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -186,7 +186,7 @@ a:hover {
 
 .graticule { /* The gridlines on the globe */
     fill: none;
-    stroke: #e0e0e0;
+    stroke: #3c3c3c;
     stroke-width: .5px;
     stroke-opacity: 0.5;
 }
@@ -203,8 +203,4 @@ a:hover {
     stroke-width: 1px;
     cursor: pointer;
     transition: r 0.2s ease-in-out; /* Smooth transition for radius on hover */
-}
-
-.point-nepal:hover {
-    r: 10; /* Make the point larger on hover */
 }
