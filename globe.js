@@ -31,6 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const graticule = svg.append("path").attr("class", "graticule");
     let land, point;
 
+    land = FileAttachment("land-110m.json").json().then(world => topojson.feature(world, world.objects.land))
+
     // --- Drag Behavior ---
     const drag = d3.drag()
         .on("start", dragstarted)
