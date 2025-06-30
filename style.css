@@ -13,11 +13,52 @@ body {
     display: flex;
     min-height: 100vh;
 }
-
+/* --- Adjust Container Layout --- */
 .container {
     display: flex;
+    flex-direction: column; /* Stack elements vertically */
     width: 100%;
-    flex-grow: 1; /* Ensures the container takes up full viewport height */
+    flex-grow: 1;
+}
+
+/* --- Projects Section Grid Layout --- */
+.projects {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+    gap: 20px; /* Space between grid items */
+    padding: 40px; /* Add padding around the grid */
+    background-color: #ffffff; /* White background for the projects section */
+    border-bottom: 1px solid #e0e0e0; /* Separator line below projects */
+}
+
+.project-item {
+    border: 1px solid #e0e0e0; /* Add a border around each project */
+    padding: 20px; /* Add padding inside each project item */
+    background-color: #f8f8f8; /* Light grey background for project items */
+    border-radius: 8px; /* Rounded corners for a modern look */
+}
+
+/* --- Adjust Globe Section --- */
+.right-half {
+    width: 100%; /* Take full width */
+    height: 500px; /* Set a fixed height for the globe container */
+    background-color: #f0f0f0; /* Slightly different background for visual separation */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 900px) {
+    .projects {
+        grid-template-columns: 1fr; /* Single column layout for smaller screens */
+    }
+
+    .right-half {
+        height: 300px; /* Reduce globe height on smaller screens */
+    }
 }
 
 /* --- Left Half Styling --- */
@@ -74,12 +115,6 @@ p {
     margin-bottom: 10px;
 }
 
-.project-item {
-    margin-bottom: 25px;
-    padding-left: 10px; /* Slight indent for project items */
-    border-left: 2px solid #e0e0e0; /* Subtle visual cue */
-}
-
 .project-item h4 {
     font-size: 1.1em;
     font-weight: 400;
@@ -114,18 +149,6 @@ a:hover {
     border-top: 1px solid #eee;
 }
 
-
-/* --- Right Half Styling --- */
-.right-half {
-    width: 60%;
-    background-color: #f0f0f0; /* Slightly different background for visual separation */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden; /* Important if your D3.js viz might overflow */
-    position: relative; /* For potential absolute positioning of child elements */
-}
-
 #dynamic-content-placeholder {
     text-align: center;
     color: #888;
@@ -133,35 +156,6 @@ a:hover {
     /* You'll replace this with your actual dynamic content styling */
 }
 
-/* --- Responsive Design (Basic Example) --- */
-@media (max-width: 900px) { /* Adjust breakpoint as needed */
-    .container {
-        flex-direction: column; /* Stack halves vertically on smaller screens */
-    }
-
-    .left-half,
-    .right-half {
-        width: 100%;
-    }
-
-    .left-half {
-        border-right: none;
-        border-bottom: 1px solid #e0e0e0; /* Separator when stacked */
-        min-height: 50vh; /* Ensure it takes some space */
-    }
-
-    .right-half {
-        min-height: 300px; /* Give some default height to the dynamic content area */
-    }
-
-    .main-header h1 {
-        font-size: 2.2em;
-    }
-
-    .main-header h2 {
-        font-size: 1em;
-    }
-}
 
 /* --- Globe Styling --- */
 .right-half {
