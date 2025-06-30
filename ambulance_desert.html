@@ -55,9 +55,14 @@
             L.geoJSON(data).addTo(map);
         })
         .catch(error => console.error("Error loading GeoJSON:", error));
+
+          fetch("assets/hokkaido_geojson/fireamulance-stations.geojson")
+        .then(response => response.json())
+        .then(data => {
+            L.geoJSON(data).addTo(map);
+        })
+        .catch(error => console.error("Error loading GeoJSON:", error));
         
-        L.geoJSON(geojsonData2).addTo(map);
-        L.geoJSON(geojsonData3).addTo(map);
     </script>
 </body>
 </html>
