@@ -187,88 +187,6 @@
                 .attr("class", "graticule")
                 .attr("d", path);
 
-            // --- Sample world data (simplified) ---
-            // Using a simple world outline since external JSON might not be available
-            const sampleWorld = {
-                "type": "FeatureCollection",
-                "features": [
-                    {
-                        "type": "Feature",
-                        "properties": {"name": "Sample Land"},
-                        "geometry": {
-                            "type": "Polygon",
-                            "coordinates": [[
-                                [-180, -60], [-180, 60], [180, 60], [180, -60], [-180, -60]
-                            ]]
-                        }
-                    }
-                ]
-            };
-
-            // Create continents data
-            const continents = [
-                // North America
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Polygon",
-                        "coordinates": [[
-                            [-170, 70], [-50, 70], [-50, 15], [-170, 15], [-170, 70]
-                        ]]
-                    }
-                },
-                // South America
-                {
-                    "type": "Feature", 
-                    "geometry": {
-                        "type": "Polygon",
-                        "coordinates": [[
-                            [-85, 15], [-30, 15], [-30, -60], [-85, -60], [-85, 15]
-                        ]]
-                    }
-                },
-                // Europe
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Polygon", 
-                        "coordinates": [[
-                            [-15, 70], [50, 70], [50, 35], [-15, 35], [-15, 70]
-                        ]]
-                    }
-                },
-                // Africa
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Polygon",
-                        "coordinates": [[
-                            [-20, 35], [55, 35], [55, -35], [-20, -35], [-20, 35]
-                        ]]
-                    }
-                },
-                // Asia
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Polygon",
-                        "coordinates": [[
-                            [50, 80], [180, 80], [180, 10], [50, 10], [50, 80]
-                        ]]
-                    }
-                },
-                // Australia
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Polygon",
-                        "coordinates": [[
-                            [110, -10], [160, -10], [160, -45], [110, -45], [110, -10]
-                        ]]
-                    }
-                }
-            ];
-
             // Add land masses
             const land = globe.selectAll(".land")
                 .data(continents)
@@ -330,10 +248,14 @@
 
             // --- Update Globe Rendering ---
             function updateGlobe() {
-                sphere.attr("d", path);
-                graticule.attr("d", path);
-                land.attr("d", path);
-                point.attr("d", path.pointRadius(5));
+                sphere.attr("d", path({ type: "Sphere" }));
+                graticule.attr("d", path(d3.geoGraticule()()));
+                if (land) {
+                    svg.selectAll(".land")
+                        .datum(land)
+                        .attr("d", path); // Update land paths
+                }
+                if (point) point.attr("d", path.pointRadius(5));
             }
 
             // Try to load real world data if available
