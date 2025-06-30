@@ -6,8 +6,14 @@
     <title>Leaflet Map with GeoJSON</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
         #map {
-            height: 600px;
+            height: 100%;
             width: 100%;
         }
     </style>
@@ -17,52 +23,63 @@
     <div id="map"></div>
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
     <script>
         // Initialize the map
-        const map = L.map('map').setView([0, 0], 2);
-
+        const map = L.map('map').setView([43.06417, 141.34694], 8); // Center on Hokkaido, Japan
+    
         // Add a tile layer
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
         }).addTo(map);
-
-        // Example GeoJSON data
-        const geojsonData1 = {
-            "type": "FeatureCollection",
-            "features": [
-                // Add your GeoJSON features here
-            ]
-        };
-
-        const geojsonData2 = {
-            "type": "FeatureCollection",
-            "features": [
-                // Add your GeoJSON features here
-            ]
-        };
-
-        const geojsonData3 = {
-            "type": "FeatureCollection",
-            "features": [
-                // Add your GeoJSON features here
-            ]
-        };
-
-        // Add GeoJSON layers to the map
+    
+        // Create layer groups for GeoJSON data
+        const ambulanceDesertsLayer = L.layerGroup();
+        const fireAmbulanceStationsLayer = L.layerGroup();
+    
+        // Add GeoJSON layers to respective layer groups
         fetch("assets/hokkaido_geojson/ambulance-deserts.geojson")
-        .then(response => response.json())
-        .then(data => {
-            L.geoJSON(data).addTo(map);
-        })
-        .catch(error => console.error("Error loading GeoJSON:", error));
-
-          fetch("assets/hokkaido_geojson/fireamulance-stations.geojson")
-        .then(response => response.json())
-        .then(data => {
-            L.geoJSON(data).addTo(map);
-        })
-        .catch(error => console.error("Error loading GeoJSON:", error));
-        
+            .then(response => response.json())
+            .then(data => {
+                L.geoJSON(data).addTo(ambulanceDesertsLayer);
+            })
+            .catch(error => {
+                console.error("Error loading ambulance deserts GeoJSON:", error);
+                alert("Failed to load ambulance deserts data.");
+            });
+    
+        fetch("assets/hokkaido_geojson/fireambulance-stations.geojson")
+            .then(response => response.json())
+            .then(data => {
+                L.geoJSON(data, {
+                    pointToLayer: function (feature, latlng) {
+                        return L.circleMarker(latlng, {
+                            radius: 6,           // Size of the dot
+                            fillColor: "red",    // Fill color
+                            color: "red",        // Border color
+                            weight: 1,           // Border thickness
+                            opacity: 0.5,        // Border opacity
+                            fillOpacity: 0.5     // Fill opacity
+                        });
+                    }
+                }).addTo(fireAmbulanceStationsLayer);
+            })
+            .catch(error => {
+                console.error("Error loading fire ambulance stations GeoJSON:", error);
+                alert("Failed to load fire ambulance stations data.");
+            });
+    
+        // Add layer control to toggle layers
+        const overlayLayers = {
+            "Ambulance Deserts": ambulanceDesertsLayer,
+            "Fire Ambulance Stations": fireAmbulanceStationsLayer,
+        };
+    
+        L.control.layers(null, overlayLayers).addTo(map);
+    
+        // Add layers to the map by default
+        ambulanceDesertsLayer.addTo(map);
+        fireAmbulanceStationsLayer.addTo(map);
     </script>
 </body>
 </html>
